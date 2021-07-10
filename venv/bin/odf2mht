@@ -51,7 +51,7 @@ msg.epilogue = ''
 odhandler = ODF2XHTML()
 result = odhandler.odf2xhtml(unicode(sys.argv[1]))
 htmlpart = MIMEText(result,'html','us-ascii')
-htmlpart['Content-Location'] = 'index.html'
+htmlpart['Content-Location'] = 'post_list.html'
 msg.attach(htmlpart)
 z = zipfile.ZipFile(sys.argv[1])
 for file in z.namelist():

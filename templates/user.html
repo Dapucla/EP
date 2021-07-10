@@ -1,0 +1,31 @@
+{#{% extends 'base.html' %}#}
+{% load static %}
+{% block content %}
+    <html>
+    <head>
+  <title>Course example</title>
+  <link rel="stylesheet" href="{% static 'css/to-do.css' %}" />
+</head>
+
+<body>
+
+  <div id="list_section">
+    <h1 id="list_section__header">Что нам нужно сделать сегодня?</h1>
+      <a href="{% url 'base' %}">Назад</a>
+    <ul>
+      <li class="list_section__item">Добавить новые товары</li>
+    </ul>
+    <div id="list_section__newItemButton"><button href="#">new item</button></div>
+    <form id="list_section__newItemForm">
+      <input type="text" id="itemField" placeholder="Item" />
+      <input type="submit" id="add" value="add" />
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-1.12.3.js" integrity="sha256-1XMpEtA4eKXNNpXcJ1pmMPs8JV+nwLdEqwiJeCQEkyc=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
+
+{% endblock content %}
+

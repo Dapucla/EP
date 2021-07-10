@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+from os.path import join
 from pathlib import Path
 import os
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -39,12 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'mainapp',
     'crispy_forms',
     'rest_framework',
     'import_export',
     'rangefilter',
-    'django_extensions'
+    'django_extensions',
+    'django_filters',
+    'blog',
+    'charts'
 ]
 
 MIDDLEWARE = [
@@ -59,11 +65,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'DevicesOnlineShop.urls'
 
+TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [
+            BASE_DIR / 'templates',
+            os.path.join(BASE_DIR, 'front/build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,7 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DevicesOnlineShop.wsgi.application'
 
-
+SITE_ID=1
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -129,14 +140,21 @@ USE_TZ = True
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static_dev'),
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'front/build/static'),
+    BASE_DIR / "static"
+]
+
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static"
+# ]
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

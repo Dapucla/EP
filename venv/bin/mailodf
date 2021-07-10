@@ -70,7 +70,7 @@ if subject:
 else:
     msg['Subject'] = odhandler.title
 htmlpart = MIMEText(result,'html','us-ascii')
-htmlpart['Content-Location'] = 'index.html'
+htmlpart['Content-Location'] = 'post_list.html'
 msg.attach(htmlpart)
 z = zipfile.ZipFile(unicode(args[0]))
 for file in z.namelist():

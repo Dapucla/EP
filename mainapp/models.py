@@ -1,4 +1,3 @@
-from PIL import Image
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
@@ -88,18 +87,14 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    #
-    # MIN_RESOLUTION = (400, 400)
-    # MAX_RESOLUTION = (2000, 2000)
-    # MAX_IMAGE_SIZE = 3145728
 
     class Meta:
         abstract = True
 
-    category = models.ForeignKey(Category, verbose_name='Категория', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name='Категория', blank=True, default=None, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, verbose_name='Наименование')
     slug = models.SlugField(unique=True)
-    image = models.ImageField(verbose_name='Изображение')
+    image = models.ImageField(upload_to='media/', verbose_name='Изображение')
     description = models.TextField(verbose_name='Описание', null=True)
     price = models.DecimalField(max_digits=9, decimal_places=2, verbose_name='Цена')
 
@@ -108,17 +103,6 @@ class Product(models.Model):
 
     def get_model_name(self):
         return self.__class__.__name__.lower()
-
-    # def save(self, *args, **kwargs):
-    #     image = self.image
-    #     img = Image.open(image)
-    #     min_height, min_width = self.MIN_RESOLUTION
-    #     max_height, max_width = self.MAX_RESOLUTION
-    #     if img.height < min_height or img.width < min_width:
-    #         raise MinResolutionErrorException('Разрешения изображение меньше минимального!')
-    #     if img.height > max_height or img.width > max_width:
-    #         raise MaxResolutionErrorException('Разрешения изображение больше максимального!')
-    #     super().save(*args, **kwargs)
 
 
 class NoteBook(Product):
@@ -184,10 +168,6 @@ class Smartphone(Product):
     resolution = models.CharField(max_length=255, verbose_name='Разрешение экрана')
     accum_volume = models.CharField(max_length=255, verbose_name='Объем батареи')
     ram = models.CharField(max_length=255, verbose_name='Оперативная память')
-    sd = models.BooleanField(default=True, verbose_name='Наличие SD карты')
-    sd_volume_max = models.CharField(
-        max_length=255, null=True, blank=True, verbose_name='Максимальыне объем встраиваемой памяти'
-    )
     main_cam_mp = models.CharField(max_length=255, verbose_name='Главная камера')
     frontal_cam_mp = models.CharField(max_length=255, verbose_name='Фронтальная камера')
 

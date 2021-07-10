@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    </head>
+
+    <nav class="main-nav">
+        <ul class="main-nav__menu">
+             <li class="main-nav__menu-item">
+                <a class="main-nav__logo-link"  href="{% url 'base' %}">Техно-мир</a>
+            </li>
+            <li class="main-nav__menu-item">
+                <a class="main-nav__menu-item-link" href="{% url 'base' %}">Главная</a>
+            </li>
+            <li class="main-nav__menu-item">
+                <a class="main-nav__menu-item-link" href="{% url 'cart' %}">Корзина</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Блог</a>
+            </li>
+        </ul>
+    </nav>
+
+<body>
+{% block content %}
+
+    <div class="article">
+        <div class="article-content">
+            <div class="article-content__title animate__animated animate__bounce">
+                <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+            </div>
+            <div class="article-content__info animate__animated animate__flash">
+                <p>{{ post.author }} | {{ post.created_on }}</p>
+            </div>
+            <div class="article-content__text animate__animated animate__flash">
+                <p>{{ object.content | safe }}</p>
+            </div>
+        </div>
+        <div class="article__footer">
+            <a class="hvr-underline-from-left" href="{% url 'home' %}">Назад</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+    </script>
+{% endblock content %}
+</body>
+</html>

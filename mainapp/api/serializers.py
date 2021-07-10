@@ -32,8 +32,6 @@ class SmartphoneSerializer(BaseProductSerializer, serializers.ModelSerializer):
     resolution = serializers.CharField(required=True)
     accum_volume = serializers.CharField(required=True)
     ram = serializers.CharField(required=True)
-    sd = serializers.BooleanField(required=True)
-    sd_volume_max = serializers.CharField(required=True)
     main_cam_mp = serializers.CharField(required=True)
     frontal_cam_mp = serializers.CharField(required=True)
 

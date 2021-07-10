@@ -30,19 +30,7 @@ class OrderAdmin(ImportExportModelAdmin):
 
 
 class SmartphoneAdminForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        instance = kwargs.get('instance')
-        if instance and not instance.sd:
-            self.fields['sd_volume_max'].widget.attrs.update({
-                'readonly': True, 'style': 'background: lightgray;'
-            })
-
-    def clean(self):
-        if not self.cleaned_data['sd']:
-            self.cleaned_data['sd_volume_max'] = None
-        return self.cleaned_data
+    pass
 
 
 class NotebookAdmin(ImportExportModelAdmin):

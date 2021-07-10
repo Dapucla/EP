@@ -1,8 +1,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 
-from mainapp.models import Smartphone
-
+from mainapp.models import Smartphone, Headphones, NoteBook, Smartwatches, TV
 
 register = template.Library()
 
@@ -39,8 +38,6 @@ PRODUCT_SPEC = {
         'Разрешение экрана': 'resolution',
         'Заряд аккумулятора': 'accum_volume',
         'Оперативная память': 'ram',
-        'Наличие слота для карты памяти': 'sd',
-        'Максимальный объем SD карты': 'sd_volume_max',
         'Задняя Камера МП': 'main_cam_mp',
         'Фронтальная камера МП': 'frontal_cam_mp',
     },
@@ -75,8 +72,12 @@ def get_product_spec(product, model_name):
 def product_spec(product):
     model_name = product.__class__._meta.model_name
     if isinstance(product, Smartphone):
-        if not product.sd:
-            PRODUCT_SPEC['smartphone'].pop('Максимальный объем SD карты')
-        else:
-            PRODUCT_SPEC['smartphone']['Максимальный объем SD карты'] = 'sd_volume_max'
-    return mark_safe(TABLE_HEAD + get_product_spec(product, model_name) + TABLE_TAIL)
+        return mark_safe(TABLE_HEAD + get_product_spec(product, model_name) + TABLE_TAIL)
+    if isinstance(product, Headphones):
+        return mark_safe(TABLE_HEAD + get_product_spec(product, model_name) + TABLE_TAIL)
+    if isinstance(product, NoteBook):
+        return mark_safe(TABLE_HEAD + get_product_spec(product, model_name) + TABLE_TAIL)
+    if isinstance(product, Smartwatches):
+        return mark_safe(TABLE_HEAD + get_product_spec(product, model_name) + TABLE_TAIL)
+    if isinstance(product, TV):
+        return mark_safe(TABLE_HEAD + get_product_spec(product, model_name) + TABLE_TAIL)
