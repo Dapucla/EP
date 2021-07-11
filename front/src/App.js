@@ -13,7 +13,7 @@ class App extends React.Component{
     let data;
 
     axios.get('http://ip4sem.std-972.ist.mospolytech.ru/api/smartphones/')
-    .then(res =>
+    .then(res => {
       data = res.data;
       this.setState({
           categories: data
