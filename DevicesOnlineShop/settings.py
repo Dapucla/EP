@@ -29,7 +29,7 @@ SECRET_KEY = 'g2p8$5x0ip#6%h^u_xh-0#_j$0#q^#gnq@tn_y4v^qw(v4+6_*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['ip4sem.std-972.ist.mospolytech.ru','localhost']
 
 
 # Application definition
