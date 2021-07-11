@@ -12,8 +12,8 @@ class App extends React.Component{
   componentDidMount() {
     let data;
 
-    axios.get('http://127.0.0.1:8000/api/smartphones/')
-    .then(res => {
+    axios.get('http://ip4sem.std-972.ist.mospolytech.ru/api/smartphones/')
+    .then(res =>
       data = res.data;
       this.setState({
           categories: data
